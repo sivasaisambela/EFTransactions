@@ -1,0 +1,100 @@
+﻿@model IEnumerable<EFTransaction.Models.Employee>
+@{
+    ViewData["Title"] = "Employee";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active" arial-current="page">
+                            Employee List
+                        </li>
+                    </ol>
+                </nav><br /><br />
+                <div class="row">
+                    <div class="col-md-12 table-responsive-md">
+                        <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Home" asp-action="Create">
+                            New Employee
+                        </a>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Employee No.</th>
+                                    <th>Employee Image</th>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Department</th>
+                                    <th>Gender</th>
+                                   @* <th>Department Name</th>
+                                    <th>Department Code</th>*@
+                                    <th>Joined</th>
+                                    <th>City</th>
+                                    <th class="text-warning">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-action="Detail" asp-route-id="@item.Id">
+                                                    @item.Id
+                                                </a>
+                                            </td>
+
+                                            <td>
+                                                <img src="@Url.Content(item.ImageUrl)" alt="image" />
+                                            </td>
+                                            <td>
+                                                @item.FirstName  @item.LastName
+                                            </td>
+                                            <td>
+                                                @item.Designation
+                                            </td>
+                                            <td>
+                                                @item.DepartmentId
+                                            </td>
+                                          @*  <td>
+                                                @item.DeptName
+                                            </td>
+                                            <td>
+                                                @item.DeptCode
+                                            </td>*@
+                                            <td>
+                                                @item.Gender
+                                            </td>
+                                            <td>
+                                                @item.DateOfJoin.ToString("dd/MM/yyyy")
+                                            </td>
+                                            <td>
+                                                @item.City
+                                            </td>
+                                            <td>
+                                                <a class="text-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                                                <a class="text-success" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>Detail</a>
+                                                <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash-xmark"></i>Delete</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
